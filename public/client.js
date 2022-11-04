@@ -34,4 +34,15 @@ function divide() {
 	//code to divide
 }
 
+function calculate() {
+	console.log('Inside calculate()');
+	let newobject = {
+		firstValue: $('#firstNumber').val(),
+		secondValue: $('#secondNumber').val()
+	}
+	compile.push(newobject);
+	console.log('Current object ready to compile: ', compile);
+
+}
+
 
