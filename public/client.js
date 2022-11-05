@@ -1,9 +1,12 @@
 $(document).ready(onReady);
 
 let compile = [];
+let operatorToDO = "";
 
 
 function onReady() {
+	console.log("Jquery is loaded!!");
+
 	$('#add-btn').on('click', addition);
 	$('#subtract-btn').on('click', subtraction);
 	$('#multiply-btn').on('click', multiply);
@@ -21,7 +24,7 @@ function render() {
 
 
 function addition() {
-	$('firstNumber').val()
+	operatorToDO = '+';
 	//code to add
 }
 function subtraction() {
@@ -38,11 +41,18 @@ function calculate() {
 	console.log('Inside calculate()');
 	let newobject = {
 		firstValue: $('#firstNumber').val(),
-		secondValue: $('#secondNumber').val()
+		secondValue: $('#secondNumber').val(),
+		operator: operatorToDO
 	}
 	compile.push(newobject);
 	console.log('Current object ready to compile: ', compile);
 
 }
 
+function getCalculation() {
+
+
+
+
+}
 
