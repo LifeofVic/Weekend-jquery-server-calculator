@@ -2,10 +2,10 @@
   "name": "weekend-jquery-server-calculator",
   "version": "1.0.0",
   "description": "[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md",
-  "main": "jquery.js",
+  "main": "/public",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
