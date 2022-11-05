@@ -45,19 +45,23 @@ function divide() {
 
 function sendCalculation() {
 	console.log('Inside calculate()');
-	let newobject = {
+	let newObject = {
 		firstValue: $('#firstNumber').val(),
 		secondValue: $('#secondNumber').val(),
 		operator: operatorToDO,
 		result: 0
 	}
-	compile.push(newobject);
+	compile.push(newObject);
 	console.log('Current object ready to compile: ', compile);
 
 	$.ajax({
 		method: 'POST',
-		url: '/result'
+		url: '/result',
+		data: {
+			newObject
+		}
 	}).then(function (response) {
+		console.log('sending data to server...');
 		$('#firstNumber').val('');
 		$('#secondNumber').val('');
 		getCalculation();
