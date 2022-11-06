@@ -14,7 +14,7 @@ function onReady() {
 
 	$('#equal-btn').on('click', sendCalculation);
 
-
+	getCalculation();
 }
 
 
