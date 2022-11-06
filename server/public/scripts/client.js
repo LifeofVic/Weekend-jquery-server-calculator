@@ -2,7 +2,6 @@ $(document).ready(onReady);
 
 let compile = [];
 let operatorToDO = "";
-let result = [];
 
 
 function onReady() {
@@ -13,7 +12,7 @@ function onReady() {
 	$('#multiply-btn').on('click', multiply);
 	$('#divide-btn').on('click', divide);
 
-	$('#equal-btn').on('click', calculate);
+	$('#equal-btn').on('click', sendCalculation);
 
 
 }
@@ -22,6 +21,7 @@ function onReady() {
 function render(result) {
 	//will hold code that will keep the DOM up to date with the lastest input values (history results)
 	$('#math-problems').empty();
+	getCalculation();
 	for (let calculation of result) {
 		$('#math-problems').append(`
 			<ul> answer is: ${calculation.result} 	</ul>
@@ -33,47 +33,35 @@ function render(result) {
 
 function addition() {
 	operatorToDO = '+';
-	sendCalculation()
 	//code to add
 }
 function subtraction() {
 	operatorToDO = '-';
-	sendCalculation()
 	//code to subtract
 }
 function multiply() {
 	operatorToDO = '*';
-	sendCalculation()
 	//code to multiply
 }
 function divide() {
 	operatorToDO = '/';
-	sendCalculation()
 	//code to divide
 }
 
 function sendCalculation() {
-	console.log('Inside calculate()');
-	// let newObject = {
-	// 	firstValue: $('#firstNumber').val(),
-	// 	secondValue: $('#secondNumber').val(),
-	// 	operator: operatorToDO,
-	// 	result: 0
-	// }
-	// compile.push(newObject);
-	//console.log('Current object ready to compile: ', compile);
+	console.log('Inside sendCalculate()');
 
 	$.ajax({
 		method: 'POST',
-		url: '/result',
+		url: '/calcHistory',
 		data: {
-			firstValue: $('#firstNumber').val(),
-			secondValue: $('#secondNumber').val(),
+			firstValue: Number($('#firstNumber').val()),
+			secondValue: Number($('#secondNumber').val()),
 			operator: operatorToDO,
 			result: 0
 		}
 	}).then(function (response) {
-		console.log('sending data to server...');
+		console.log(' bacl from sending data to server...');
 		getCalculation();
 		$('#firstNumber').val('');
 		$('#secondNumber').val('');
@@ -87,7 +75,7 @@ function getCalculation() {
 	console.log('We are in the receving the data from Server...');
 	$.ajax({
 		method: 'GET',
-		url: '/result'
+		url: '/calcHistory'
 	}).then(function (response) {
 		//result.push(response)
 		render(response);
