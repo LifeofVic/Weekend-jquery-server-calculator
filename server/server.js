@@ -20,19 +20,19 @@ app.post('/calculate', (req, res) => {
 	let incomingData = req.body;
 
 	if (incomingData.operator === '+') {
-		result = Number(incomingData.firstValue + incomingData.secondValue);
+		result = (Number(incomingData.firstValue) + Number(incomingData.secondValue));
 		incomingData.result = result;
 	}
 	else if (incomingData.operator === '-') {
-		result = Number(incomingData.firstValue - incomingData.secondValue);
+		result = (Number(incomingData.firstValue) - Number(incomingData.secondValue));
 		incomingData.result = result;
 	}
 	else if (incomingData.operator === '*') {
-		result = Number(incomingData.firstValue * incomingData.secondValue);
+		result = (Number(incomingData.firstValue) * Number(incomingData.secondValue));
 		incomingData.result = result;
 	}
 	else if (incomingData.operator === '/') {
-		result = Number(incomingData.firstValue / incomingData.secondValue);
+		result = (Number(incomingData.firstValue) / Number(incomingData.secondValue));
 		incomingData.result = result;
 	}
 	else {
