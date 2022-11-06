@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+app = express();
 
 const port = 5000;
 //const incomingData = require('./public/client.js');
-let previousCalculation = require('./modules/calcHistory');
+let previousCalculation = require('calcHistory');
 
-let resultCompiler = [{ data: 'is it working?' }];
+//let resultCompiler = [{ data: 'is it working?' }];
 let result = 0;
 
 app.use(bodyParser.urlencoded({ extended: true }));
