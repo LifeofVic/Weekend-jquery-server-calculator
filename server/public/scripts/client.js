@@ -24,7 +24,7 @@ function render(result) {
 	//will hold code that will keep the DOM up to date with the lastest input values (history results)
 	$('#math-problems').empty();
 	//getCalculation();
-	$('result-view').text("Answer is", result[0].result);
+	$('#result-view').html(`Answer is:  ${result[result.length - 1].result}`);
 	for (let object of result) { // change to the newest calculation will appear on top of the list instead of the bottom of list when appended to html. 
 		$('#math-problems').append(`
 			<li> ${object.firstValue} ${object.operator} ${object.secondValue} = ${object.result} 	</li>
@@ -63,29 +63,32 @@ function divide() {
 
 function sendCalculation() {
 	console.log('...inside sendCalculate()');
+	if ($('#firstNumber').val() === "" || $('#secongNumber').val() === "") {
+		alert('Missing input values to calculate');
+	}
+	else {
+		$.ajax({
+			method: 'POST',
+			url: '/calculate',
+			data: {
+				firstValue: ($('#firstNumber').val()),
+				secondValue: ($('#secondNumber').val()),
+				operator: operatorToDO,
+				result: 0
+			}
+		}).then(function (response) {
+			console.log('...back from sending data to server...');
+			getCalculation();
+			$('#firstNumber').val('');
+			$('#secondNumber').val('');
 
-	$.ajax({
-		method: 'POST',
-		url: '/calculate',
-		data: {
-			firstValue: Number($('#firstNumber').val()),
-			secondValue: Number($('#secondNumber').val()),
-			operator: operatorToDO,
-			result: 0
-		}
-	}).then(function (response) {
-		console.log('..back from sending data to server...');
-		getCalculation();
-		$('#firstNumber').val('');
-		$('#secondNumber').val('');
-
-	}).catch(function (error) {
-		alert('sendCalculation has failed', error);
-	});
+		}).catch(function (error) {
+			alert('sendCalculation has failed', error);
+		});
+	}
 }
-
 function getCalculation() {
-	console.log('We are in the receving the data from Server...');
+	console.log('...We are receving the data from Server');
 	$.ajax({
 		method: 'GET',
 		url: '/calculate'
