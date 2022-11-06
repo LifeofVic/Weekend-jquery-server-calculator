@@ -1,0 +1,19 @@
+#add-btn,
+#subtract-btn,
+#multiply-btn,
+#divide-btn,
+#equal-btn,
+#clear-btn {
+	font-size: 20px;
+	margin: 2px;
+	padding: auto;
+}
+
+input {
+	font-size: 20px;
+}
+
+#result-view {
+	font-size: 20px;
+	font-
+}

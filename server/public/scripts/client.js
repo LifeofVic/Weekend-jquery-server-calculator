@@ -13,47 +13,56 @@ function onReady() {
 	$('#divide-btn').on('click', divide);
 
 	$('#equal-btn').on('click', sendCalculation);
+	$('#clear-btn').on('click', clearInput);
 
 	//getCalculation();
 }
 
 
 function render(result) {
+	console.log('...inside render()...');
 	//will hold code that will keep the DOM up to date with the lastest input values (history results)
 	$('#math-problems').empty();
 	//getCalculation();
-	for (let object of result) {
+	$('result-view').text("Answer is", result[0].result);
+	for (let object of result) { // change to the newest calculation will appear on top of the list instead of the bottom of list when appended to html. 
 		$('#math-problems').append(`
-			<ul> ${object.firstValue} ${object.operator} ${object.secondValue} = ${object.result} 	</ul>
+			<li> ${object.firstValue} ${object.operator} ${object.secondValue} = ${object.result} 	</li>
 		`);
 	}
 
 }
 
+function clearInput() {
+	console.log('We have cleared the input field!!');
+	$('#firstNumber').val('');
+	$('#secondNumber').val('');
+
+}
 
 function addition() {
-	console.log('In addition function()...');
+	console.log('...in addition function()...');
 	operatorToDO = '+';
 	//code to add
 }
 function subtraction() {
-	console.log('In subtraction function()...');
+	console.log('...in subtraction function()...');
 	operatorToDO = '-';
 	//code to subtract
 }
 function multiply() {
-	console.log('In multiply function()...');
+	console.log('...in multiply function()...');
 	operatorToDO = '*';
 	//code to multiply
 }
 function divide() {
-	console.log('In divide function()...');
+	console.log('...in divide function()...');
 	operatorToDO = '/';
 	//code to divide
 }
 
 function sendCalculation() {
-	console.log('Inside sendCalculate()');
+	console.log('...inside sendCalculate()');
 
 	$.ajax({
 		method: 'POST',
@@ -65,7 +74,7 @@ function sendCalculation() {
 			result: 0
 		}
 	}).then(function (response) {
-		console.log(' bacl from sending data to server...');
+		console.log('..back from sending data to server...');
 		getCalculation();
 		$('#firstNumber').val('');
 		$('#secondNumber').val('');
