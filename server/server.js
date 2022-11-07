@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 let result = 0;
 
 //const incomingData = require('./public/client.js');
@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //will look in the 'public' folder for the files needed to display in the client side (DOM).
 app.use(express.static('server/public'));
 
-app.listen(port, () => {
-	console.log('Listening on port: ', port);
+app.listen(PORT, () => {
+	console.log('Listening on PORT: ', PORT);
 });
 
 app.post('/calculate', (req, res) => {
